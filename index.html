@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kickball Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14261F; --ink-soft:#3D544A;
+  --grass:#2F6B4F; --grass-deep:#1D4534;
+  --clay:#C77A4A; --ball:#DC3B2B;
+  --paper:#F1F3EF; --card:#FFFFFF; --line:#D3DAD4;
+  --warn-bg:#FDF0EC; --warn-line:#F0C3B6;
+  --good-bg:#EAF2ED;
+  --rs:#5B6EA8; --rs-bg:#EEF1F8;
+  --sans:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --disp:"Barlow Condensed",Impact,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55}
+.wrap{max-width:740px;margin:0 auto;padding:0 18px}
+
+header{background:var(--grass-deep);color:#fff;padding:38px 0 30px;
+  background-image:repeating-linear-gradient(102deg,rgba(255,255,255,.035) 0 2px,transparent 2px 26px)}
+h1{font-family:var(--disp);font-weight:700;font-size:clamp(44px,13vw,76px);line-height:.92;letter-spacing:-.01em;margin:0 0 14px}
+h1 span{display:block}
+h1 .two{color:#9BD4B4}
+.sub{max-width:46ch;color:#CFE2D8;font-size:15.5px;margin:0 0 20px}
+.scope{display:inline-block;border:1px solid rgba(255,255,255,.35);padding:7px 12px;font-size:13.5px;color:#DCEAE2;margin-bottom:20px;max-width:46ch;line-height:1.45}
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18)}
+.fact{background:var(--grass-deep);padding:11px 13px}
+.fact b{font-family:var(--disp);font-size:25px;font-weight:600;display:block;line-height:1.1}
+.fact i{font-style:normal;font-size:12.5px;color:#A9C9B9}
+@media(min-width:560px){.facts{grid-template-columns:repeat(4,1fr)}}
+
+nav{position:sticky;top:0;z-index:50;background:var(--ink);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav ul{display:flex;list-style:none;margin:0;padding:0 8px;min-width:max-content}
+nav a{display:block;padding:13px;color:#A9C0B4;text-decoration:none;font-family:var(--disp);font-size:17px;font-weight:600;letter-spacing:.02em;white-space:nowrap;border-bottom:3px solid transparent}
+nav a:hover,nav a:focus-visible{color:#fff}
+nav a.on{color:#fff;border-bottom-color:var(--ball)}
+
+section{padding:44px 0 8px;scroll-margin-top:52px}
+h2{font-family:var(--disp);font-weight:700;font-size:clamp(30px,7.5vw,42px);line-height:1;margin:0 0 6px}
+.deck{color:var(--ink-soft);margin:0 0 24px;max-width:50ch;font-size:15px}
+h3{font-family:var(--disp);font-weight:600;font-size:24px;margin:32px 0 10px;line-height:1.15}
+h4{font-size:14.5px;font-weight:700;margin:18px 0 7px}
+p{margin:0 0 13px}
+a{color:var(--grass)}
+
+ul.b{list-style:none;padding:0;margin:0 0 16px}
+ul.b li{position:relative;padding:5px 0 5px 22px;border-bottom:1px solid var(--line)}
+ul.b li:last-child{border-bottom:0}
+ul.b li::before{content:"";position:absolute;left:2px;top:13px;width:8px;height:8px;border-radius:50%;background:var(--ball)}
+
+.card{background:var(--card);border:1px solid var(--line);padding:16px 17px;margin:0 0 14px}
+.card h4{margin-top:0}
+.flag{border-left:4px solid var(--ball);background:var(--warn-bg);border-color:var(--warn-line)}
+.tip{border-left:4px solid var(--grass);background:var(--good-bg);border-color:#C3D8CB}
+.note{border-left:4px solid var(--clay);background:#FBF3EC;border-color:#E8D2BE}
+.card p:last-child{margin-bottom:0}
+.label{font-family:var(--disp);font-size:15px;font-weight:700;color:var(--ball);letter-spacing:.03em;display:block;margin-bottom:3px}
+.tip .label{color:var(--grass)}
+.note .label{color:#A85F30}
+
+/* ---- rule citation buttons ---- */
+.cite{
+  display:inline-block;font-family:var(--disp);font-weight:700;font-size:12.5px;line-height:1;
+  padding:3px 5px;margin:0 1px;vertical-align:1px;cursor:pointer;
+  background:var(--good-bg);border:1px solid #B9CFC2;color:var(--grass-deep);border-radius:2px;
+}
+.cite:hover{background:var(--grass);color:#fff;border-color:var(--grass)}
+.cite.rsb{background:var(--rs-bg);border-color:#BFC9E2;color:var(--rs)}
+.cite.rsb:hover{background:var(--rs);color:#fff;border-color:var(--rs)}
+
+#sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:100;background:var(--card);
+  border-top:4px solid var(--grass);box-shadow:0 -6px 24px rgba(20,38,31,.22);
+  padding:16px 18px 18px;max-height:64vh;overflow-y:auto;transform:translateY(102%);
+  transition:transform .18s ease-out;
+}
+#sheet.up{transform:translateY(0)}
+#sheet.rs{border-top-color:var(--rs)}
+@media(min-width:760px){#sheet{left:auto;right:24px;bottom:24px;width:380px;border:1px solid var(--line);border-top:4px solid var(--grass)}}
+#sheet .sec{font-family:var(--disp);font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--grass);margin:0 0 2px}
+#sheet.rs .sec{color:var(--rs)}
+#sheet .ttl{font-family:var(--disp);font-size:24px;font-weight:700;line-height:1.1;margin:0 0 9px;padding-right:34px}
+#sheet .bd{font-size:14.5px;margin:0 0 11px}
+#sheet .bd em{font-style:normal;background:#F4EFDA;padding:0 3px}
+#sheet .rsblk{background:var(--rs-bg);border-left:3px solid var(--rs);padding:9px 11px;font-size:14px;margin:0 0 11px}
+#sheet .rsblk b{display:block;font-family:var(--disp);font-size:14px;letter-spacing:.03em;color:var(--rs)}
+#sheet .amb{background:var(--warn-bg);border-left:3px solid var(--ball);padding:9px 11px;font-size:14px;margin:0 0 11px}
+#sheet .amb b{display:block;font-family:var(--disp);font-size:14px;letter-spacing:.03em;color:var(--ball)}
+#sheet .lnk{font-size:13.5px}
+#sheet .x{position:absolute;top:12px;right:14px;background:none;border:0;font-size:26px;line-height:1;color:var(--ink-soft);cursor:pointer;padding:0 6px}
+
+/* glossary */
+.gloss{display:grid;gap:0;border:1px solid var(--line);background:var(--card);margin-bottom:14px}
+.gr{display:grid;grid-template-columns:1fr;gap:0 14px;padding:6px 14px;border-bottom:1px solid var(--line);line-height:1.38}
+.gr:last-child{border-bottom:0}
+.gr dt{font-weight:700;font-size:14.5px;font-family:var(--sans)}
+.gr dd{margin:0;font-size:14px;color:var(--ink-soft)}
+@media(min-width:620px){.gr{grid-template-columns:154px 1fr;align-items:baseline}}
+.gtitle{font-family:var(--disp);font-size:16px;font-weight:700;letter-spacing:.03em;background:var(--grass-deep);color:#fff;padding:5px 14px}
+
+.outs{margin:0 0 18px}
+.out{display:grid;grid-template-columns:1fr;gap:2px;padding:11px 0;border-bottom:1px solid var(--line)}
+.out:last-child{border-bottom:0}
+.out b{font-weight:700;font-size:15px}
+.out span{color:var(--ink-soft);font-size:14.5px}
+@media(min-width:620px){.out{grid-template-columns:1.05fr 1fr;gap:18px;align-items:baseline}}
+
+.two-up{display:grid;gap:14px;margin-bottom:16px}
+@media(min-width:620px){.two-up{grid-template-columns:1fr 1fr}}
+.pick{background:var(--card);border:1px solid var(--line);padding:16px}
+.pick .hd{font-family:var(--disp);font-size:26px;font-weight:700;line-height:1;margin-bottom:2px}
+.pick.bunt .hd{color:var(--clay)}
+.pick.blast .hd{color:var(--ball)}
+.pick .when{font-size:12.5px;color:var(--ink-soft);margin-bottom:11px}
+.pick ul{margin:0;padding-left:17px;font-size:14.5px}
+.pick li{margin-bottom:8px}
+
+figure{margin:20px 0;background:var(--card);border:1px solid var(--line);padding:14px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:13px;color:var(--ink-soft);margin-top:10px;line-height:1.45}
+
+.toggle{display:flex;border:1px solid var(--ink);margin-bottom:16px;width:max-content}
+.toggle button{font-family:var(--disp);font-size:18px;font-weight:600;letter-spacing:.02em;padding:7px 20px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.fieldwrap{background:var(--grass);border:1px solid var(--grass-deep);padding:8px}
+.fieldwrap svg{display:block;width:100%;height:auto;touch-action:manipulation}
+.pos{cursor:pointer}
+.pos circle{fill:#fff;stroke:var(--grass-deep);stroke-width:2;transition:fill .12s}
+.pos text{font-family:var(--disp);font-weight:700;font-size:15px;fill:var(--ink);text-anchor:middle;pointer-events:none}
+.pos:hover circle{fill:#FFE9A8}
+.pos.sel circle{fill:var(--ball);stroke:#fff;stroke-width:3}
+.pos.sel text{fill:#fff}
+.rolelist{display:flex;flex-wrap:wrap;gap:8px}
+.rolebtn{font-family:var(--disp);font-size:19px;font-weight:600;padding:8px 14px;background:var(--card);border:1px solid var(--line);color:var(--ink);cursor:pointer}
+.rolebtn[aria-pressed="true"]{background:var(--ball);border-color:var(--ball);color:#fff}
+.detail{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--ball);padding:18px;margin-top:14px}
+.detail .name{font-family:var(--disp);font-size:31px;font-weight:700;line-height:1;margin:0 0 3px}
+.detail .role{font-size:13px;color:var(--ink-soft);margin:0 0 16px}
+.detail h5{font-family:var(--disp);font-size:19px;font-weight:600;margin:18px 0 7px;padding-bottom:4px;border-bottom:1px solid var(--line)}
+.detail h5:first-of-type{margin-top:0}
+.detail ul{margin:0;padding-left:18px}
+.detail li{margin-bottom:8px;font-size:15px}
+.detail .key{margin-top:16px;background:var(--warn-bg);border-left:4px solid var(--ball);padding:11px 13px;font-size:14.5px}
+.detail .key b{display:block;font-family:var(--disp);font-size:15px;color:var(--ball);letter-spacing:.03em}
+
+.sit{background:var(--card);border:1px solid var(--line);margin-bottom:10px;padding:13px 15px}
+.sit .s{font-weight:700;font-size:15px;margin-bottom:7px}
+.sit .r{display:grid;gap:8px}
+@media(min-width:620px){.sit .r{grid-template-columns:1fr 1fr;gap:16px}}
+.sit .r div{font-size:14.5px;padding-left:11px;border-left:3px solid var(--line)}
+.sit .r .o{border-left-color:var(--ball)}
+.sit .r .d{border-left-color:var(--grass)}
+.sit .r em{font-style:normal;display:block;font-size:11.5px;color:var(--ink-soft);font-weight:700;letter-spacing:.04em}
+
+.diff{background:var(--card);border:1px solid var(--line);margin-bottom:9px;padding:12px 15px;display:grid;gap:8px}
+.diff .dk{font-weight:700;font-size:15px}
+.diff .dv{font-size:14.5px;padding-left:11px;border-left:3px solid var(--ball)}
+.diff .dr{border-left-color:var(--rs)}
+.diff em{font-style:normal;display:block;font-size:11.5px;color:var(--ink-soft);font-weight:700;letter-spacing:.04em}
+@media(min-width:620px){.diff{grid-template-columns:1fr 1fr 1fr;gap:16px;align-items:start}.diff .dk{align-self:center}}
+
+.ask{background:var(--card);border:1px solid var(--line);padding:13px 15px;margin-bottom:9px;display:flex;gap:12px;align-items:flex-start}
+.ask input{margin-top:4px;width:18px;height:18px;accent-color:var(--grass);flex:none}
+.ask b{display:block;font-size:15px}
+.ask span{font-size:14px;color:var(--ink-soft)}
+
+footer{background:var(--ink);color:#8FA79A;padding:26px 0;margin-top:44px;font-size:13.5px}
+footer p{max-width:54ch}
+footer a{color:#B6D2C3}
+:focus-visible{outline:3px solid var(--clay);outline-offset:2px}
+section:focus,section:focus-visible{outline:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1><span>Kickball</span><span class="two">field guide</span></h1>
+    <p class="sub">Everything from your first game to closing out a bracket.</p>
+    <div class="scope">Written to the <b>Big Apple Sports Classic tournament</b> rules. Tap <span class="cite" style="cursor:default">§</span> for the rule behind a statement, or <span class="cite rsb" style="cursor:default">RS</span> where the regular season differs.</div>
+    <div class="facts">
+      <div class="fact"><b>45</b><i>minutes, or 7 innings</i></div>
+      <div class="fact"><b>10</b><i>fielders: 6 in, 4 out</i></div>
+      <div class="fact"><b>3</b><i>fouls and you're out</i></div>
+      <div class="fact"><b>0</b><i>leading off, ever</i></div>
+    </div>
+  </div>
+</header>
+
+<nav id="nav">
+  <ul>
+    <li><a href="#terms">Words</a></li>
+    <li><a href="#flow">How it flows</a></li>
+    <li><a href="#outs">Don't do this</a></li>
+    <li><a href="#strategy">Strategy</a></li>
+    <li><a href="#positions">Your position</a></li>
+    <li><a href="#situations">Situations</a></li>
+    <li><a href="#ump">Ask the ump</a></li>
+    <li><a href="#rs">Regular season</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ TERMS ============ -->
+<section id="terms">
+  <h2>Words you'll hear</h2>
+  <p class="deck">Skip this if you've played. Everything below uses these terms exactly as defined here.</p>
+  <div id="gloss"></div>
+</section>
+
+<!-- ============ FLOW ============ -->
+<section id="flow">
+  <h2>How the game flows</h2>
+
+  <h3>The field</h3>
+  <p>Every dimension below is from §2A, drawn to scale. <button class="cite" data-r="crashline">§2A</button></p>
+
+  <figure>
+    <svg viewBox="0 0 450 480" role="img" aria-label="Scaled kickball field diagram showing 60 foot baselines, the pitching mound at 42 feet 2.5 inches, the 40 foot crash line, and the outfield line 15 feet behind the bases">
+      <!-- fair territory -->
+      <polygon points="225,430 445,210 445,0 5,0 5,210" fill="#3C7D5E" fill-opacity=".20"/>
+      <!-- infield diamond -->
+      <polygon points="225,430 378,277 225,125 72,277" fill="#C77A4A" fill-opacity=".38" stroke="#fff" stroke-width="2"/>
+      <!-- foul lines -->
+      <line x1="225" y1="430" x2="445" y2="210" stroke="#fff" stroke-width="2.5"/>
+      <line x1="225" y1="430" x2="5" y2="210" stroke="#fff" stroke-width="2.5"/>
+
+      <!-- outfield line: 15 ft beyond the two far baselines -->
+      <path d="M416 239 L225 48 L34 239" fill="none" stroke="#1D4534" stroke-width="2.5" stroke-dasharray="9 6"/>
+      <text x="225" y="32" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="15" fill="#1D4534" text-anchor="middle">OUTFIELD BEGINS HERE</text>
+      <text x="225" y="46" font-family="Public Sans,sans-serif" font-size="11.5" fill="#1D4534" text-anchor="middle">15 ft behind the bases</text>
+
+      <!-- crash line -->
+      <line x1="123" y1="328" x2="327" y2="328" stroke="#DC3B2B" stroke-width="3" stroke-dasharray="9 6"/>
+      <circle cx="123" cy="328" r="3.5" fill="#DC3B2B"/>
+      <circle cx="327" cy="328" r="3.5" fill="#DC3B2B"/>
+      <text x="225" y="321" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="14" fill="#DC3B2B" text-anchor="middle">CRASH START LINE</text>
+
+      <!-- bases -->
+      <rect x="371" y="270" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.6" transform="rotate(45 378 277)"/>
+      <rect x="218" y="118" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.6" transform="rotate(45 225 125)"/>
+      <rect x="65" y="270" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.6" transform="rotate(45 72 277)"/>
+      <rect x="382" y="281" width="12" height="12" fill="#F5A623" stroke="#8A5A0F" stroke-width="1.2" transform="rotate(45 388 287)"/>
+      <text x="399" y="300" font-family="Public Sans,sans-serif" font-size="11" fill="#8A5A0F">safety</text>
+
+      <!-- mound -->
+      <ellipse cx="225" cy="278" rx="11" ry="6" fill="#C77A4A" stroke="#8A5A2F" stroke-width="1.2"/>
+
+      <!-- home plate + kicker's box, to scale -->
+      <path d="M216 434 L234 434 L234 427 L225 421 L216 427 Z" fill="#fff" stroke="#14261F" stroke-width="1.6"/>
+      <rect x="199" y="420" width="13" height="14" fill="none" stroke="#14261F" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+      <rect x="238" y="420" width="13" height="14" fill="none" stroke="#14261F" stroke-width="1.2" stroke-dasharray="3 2.5"/>
+
+      <!-- labels -->
+      <text x="393" y="268" font-family="Public Sans,sans-serif" font-size="12" fill="#14261F">1st</text>
+      <text x="225" y="113" font-family="Public Sans,sans-serif" font-size="12" fill="#14261F" text-anchor="middle">2nd</text>
+      <text x="44" y="268" font-family="Public Sans,sans-serif" font-size="12" fill="#14261F" text-anchor="end">3rd</text>
+      <text x="225" y="452" font-family="Public Sans,sans-serif" font-size="12" fill="#14261F" text-anchor="middle">home</text>
+      <text x="225" y="205" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="16" fill="#8A5A2F" text-anchor="middle">INFIELD</text>
+      <text x="404" y="402" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A" text-anchor="middle">foul territory</text>
+      <text x="46" y="402" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A" text-anchor="middle">foul territory</text>
+
+      <!-- dimensions -->
+      <g stroke="#3D544A" stroke-width="1" fill="none">
+        <line x1="214" y1="441" x2="61" y2="288"/>
+        <line x1="209" y1="436" x2="219" y2="446"/>
+        <line x1="56" y1="283" x2="66" y2="293"/>
+        <line x1="236" y1="441" x2="338" y2="339"/>
+        <line x1="231" y1="436" x2="241" y2="446"/>
+        <line x1="333" y1="334" x2="343" y2="344"/>
+        <line x1="213" y1="430" x2="213" y2="278"/>
+        <line x1="237" y1="430" x2="237" y2="125"/>
+        <line x1="386" y1="269" x2="424" y2="231"/>
+      </g>
+      <text x="137" y="364" font-family="Public Sans,sans-serif" font-size="12" fill="#3D544A" text-anchor="middle" transform="rotate(45 137 364)" dy="-4">60 ft</text>
+      <text x="287" y="390" font-family="Public Sans,sans-serif" font-size="11.5" fill="#3D544A" text-anchor="middle" transform="rotate(-45 287 390)" dy="12">40 ft</text>
+      <text x="206" y="354" font-family="Public Sans,sans-serif" font-size="11.5" fill="#3D544A" text-anchor="middle" transform="rotate(-90 206 354)">42 ft 2.5 in</text>
+      <text x="246" y="262" font-family="Public Sans,sans-serif" font-size="11.5" fill="#3D544A" text-anchor="middle" transform="rotate(-90 246 262)">84 ft 5 in</text>
+      <text x="410" y="246" font-family="Public Sans,sans-serif" font-size="11.5" fill="#3D544A" text-anchor="middle" transform="rotate(-45 410 246)" dy="-6">15 ft</text>
+    </svg>
+    <figcaption>Bases 60 ft apart, mound at 42 ft 2.5 in, crash marks at the 40 ft two-thirds point on each baseline, outfield starting 15 ft behind the bases. Note where the red crash line falls relative to the mound — it crosses the middle of the diamond roughly 14 ft closer to the kicker. The dashed boxes either side of home are the kicker's box and its mirror, shown at true scale so you can see how little room there is. One quirk: a 60 ft baseline puts second base 84 ft 10 in from home, not the 84 ft 5 in the rulebook lists, so one of those two numbers is a few inches out.</figcaption>
+  </figure>
+
+  <h3>The shape of a game</h3>
+  <ul class="b">
+    <li>Seven innings or <b>45 minutes</b>, whichever comes first. Semi-finals and finals get 50. <button class="cite" data-r="gamelen">§2</button> <button class="cite rsb" data-r="gamelen">RS</button></li>
+    <li>At the <b>35-minute mark</b> the head ref announces the final inning. Called in the top of an inning, that inning is the last. Called in the bottom, you get one more full inning. <button class="cite" data-r="gamelen">§2</button></li>
+    <li><b>Mercy rule:</b> no more than 6 runs in an inning. The sixth run ends that half-inning on the spot. <button class="cite" data-r="mercy">§2</button> <button class="cite rsb" data-r="mercy">RS</button></li>
+    <li><b>Slaughter rule:</b> the game ends the moment the run differential passes 12. <button class="cite" data-r="slaughter">§2</button> <button class="cite rsb" data-r="slaughter">RS</button></li>
+    <li>Home team is decided by rock-paper-scissors; in bracket play the higher seed chooses. <b>Take home</b> — last licks matter in a timed game. <button class="cite" data-r="home">§1</button></li>
+  </ul>
+
+  <h3>The pitch</h3>
+  <ul class="b">
+    <li>The pitcher rolls from the <b>pitching mound</b> — a cone or marker, not an actual mound — <b>42 ft 2.5 in</b> from the back tip of home plate. The ball must be released at the mound, not in front of or beside it. <button class="cite" data-r="mound">§4E</button></li>
+    <li>A legal pitch must bounce <b>at least twice</b> before reaching home plate. A smooth roller that doesn't is an automatic ball. <button class="cite" data-r="bounce">§4B</button></li>
+    <li>The strike zone is the empty space between the two <b>strike plates</b> set either side of home plate: <b>42 inches wide, 6 inches high</b>. Wide and very low. <button class="cite" data-r="zone">§4B</button></li>
+    <li>The zone is judged at the <b>front face</b> of the plate only — unless the ball bounces directly on the plate. <button class="cite" data-r="zone">§4B</button></li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 440 270" role="img" aria-label="Three-dimensional view of the strike zone: a 42-inch wide, 6-inch high letterbox above home plate, with a pitch bouncing twice on its way in">
+      <defs>
+        <linearGradient id="gr" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3C7D5E" stop-opacity=".16"/>
+          <stop offset="1" stop-color="#3C7D5E" stop-opacity=".34"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ground plane in perspective -->
+      <path d="M118 96 L322 96 L418 248 L22 248 Z" fill="url(#gr)" stroke="#2F6B4F" stroke-width="1" stroke-opacity=".5"/>
+      <!-- receding guide lines -->
+      <path d="M150 96 L84 248 M290 96 L356 248" fill="none" stroke="#2F6B4F" stroke-width=".8" stroke-opacity=".35" stroke-dasharray="4 5"/>
+
+      <!-- mound marker, far end -->
+      <ellipse cx="220" cy="99" rx="13" ry="4.5" fill="#C77A4A"/>
+      <text x="220" y="88" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A" text-anchor="middle">pitching mound</text>
+
+      <!-- home plate (near) -->
+      <path d="M196 232 L244 232 L244 222 L220 214 L196 222 Z" fill="#fff" stroke="#14261F" stroke-width="1.5"/>
+      <text x="220" y="246" font-family="Public Sans,sans-serif" font-size="11" fill="#14261F" text-anchor="middle">home plate</text>
+
+      <!-- strike plates flanking -->
+      <path d="M132 228 L186 228 L190 219 L138 219 Z" fill="#E9EDE9" stroke="#14261F" stroke-width="1.2"/>
+      <path d="M254 228 L308 228 L302 219 L250 219 Z" fill="#E9EDE9" stroke="#14261F" stroke-width="1.2"/>
+      <text x="96" y="226" font-family="Public Sans,sans-serif" font-size="10.5" fill="#3D544A" text-anchor="end">strike</text>
+      <text x="96" y="238" font-family="Public Sans,sans-serif" font-size="10.5" fill="#3D544A" text-anchor="end">plates</text>
+
+      <!-- the letterbox: front face + slight depth to read as 3D -->
+      <path d="M138 219 L302 219 L296 209 L144 209 Z" fill="#2F6B4F" fill-opacity=".30"/>
+      <path d="M132 228 L138 219 L144 209 L138 217 Z" fill="#2F6B4F" fill-opacity=".45"/>
+      <rect x="132" y="196" width="176" height="32" fill="#2F6B4F" fill-opacity=".20" stroke="#1D4534" stroke-width="2"/>
+      <text x="220" y="216" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="15" fill="#123528" text-anchor="middle">STRIKE ZONE</text>
+
+      <!-- dims -->
+      <line x1="132" y1="188" x2="308" y2="188" stroke="#3D544A" stroke-width="1"/>
+      <line x1="132" y1="184" x2="132" y2="192" stroke="#3D544A" stroke-width="1"/>
+      <line x1="308" y1="184" x2="308" y2="192" stroke="#3D544A" stroke-width="1"/>
+      <text x="220" y="181" font-family="Public Sans,sans-serif" font-size="11.5" fill="#3D544A" text-anchor="middle">42 in wide</text>
+      <line x1="322" y1="196" x2="322" y2="228" stroke="#3D544A" stroke-width="1"/>
+      <line x1="318" y1="196" x2="326" y2="196" stroke="#3D544A" stroke-width="1"/>
+      <line x1="318" y1="228" x2="326" y2="228" stroke="#3D544A" stroke-width="1"/>
+      <text x="330" y="215" font-family="Public Sans,sans-serif" font-size="11.5" fill="#3D544A">6 in high</text>
+
+      <!-- pitch path: descends, then two upward arcs, into the letterbox -->
+      <path d="M220 104 Q214 140 205 158" fill="none" stroke="#DC3B2B" stroke-width="2.4"/>
+      <path d="M205 158 Q196 138 199 190" fill="none" stroke="#DC3B2B" stroke-width="2.4"/>
+      <path d="M199 190 Q203 178 213 212" fill="none" stroke="#DC3B2B" stroke-width="2.4"/>
+      <circle cx="205" cy="158" r="3.2" fill="#DC3B2B"/>
+      <circle cx="199" cy="190" r="3.2" fill="#DC3B2B"/>
+      <circle cx="213" cy="212" r="7" fill="#DC3B2B"/>
+      <text x="172" y="156" font-family="Public Sans,sans-serif" font-size="10.5" fill="#B2301F" text-anchor="end">bounce 1</text>
+      <text x="166" y="192" font-family="Public Sans,sans-serif" font-size="10.5" fill="#B2301F" text-anchor="end">bounce 2</text>
+
+      <!-- high ball -->
+      <path d="M352 150 L316 178" fill="none" stroke="#C77A4A" stroke-width="1.6" stroke-dasharray="4 4"/>
+      <circle cx="356" cy="147" r="8" fill="none" stroke="#C77A4A" stroke-width="2" stroke-dasharray="4 4"/>
+      <text x="368" y="138" font-family="Public Sans,sans-serif" font-size="11" fill="#A85F30">over the top</text>
+      <text x="368" y="151" font-family="Public Sans,sans-serif" font-size="11" fill="#A85F30">= ball</text>
+    </svg>
+    <figcaption>The zone is a letterbox, not a square — 42 inches across but only 6 inches tall, judged at the front face of the plate. Two bounces minimum on the way in. Anything arriving above shin height is a ball, and most pitchers miss high.</figcaption>
+  </figure>
+
+  <h3>The count</h3>
+  <ul class="b">
+    <li><b>Three strikes</b> is an out. <b>Three fouls</b> is an out. At two strikes, the next foul is also an out. <button class="cite" data-r="fouls">§3A</button></li>
+    <li><b>Four balls</b> is a walk: the kicker takes first base. <button class="cite" data-r="walk">§4D</button></li>
+    <li><b>Four consecutive balls</b> before any strike or foul is worth <b>two bases</b>. Rare and valuable. <button class="cite" data-r="walk">§4D</button></li>
+    <li>If a foul is caused by a fixed obstruction — a tree branch, overhead fencing — you get one extra foul. <button class="cite" data-r="fouls">§3A</button></li>
+  </ul>
+
+  <div class="card tip">
+    <span class="label">A walk only pushes runners who have nowhere else to stand</span>
+    <p>The kicker takes first, and runners move up <b>only if they're forced out of their base</b> by the person behind them. A runner on first is pushed to second. A runner on second stays put unless first is also occupied. A runner on third only scores if the bases were loaded.</p>
+    <p>So a walk with a runner on second and nobody on first advances nobody but the kicker. This is why a walk is worth much less with the bases half-empty than it looks.</p>
+  </div>
+
+  <h3>The kick</h3>
+  <ul class="b">
+    <li>Contact must happen while the ball is <b>inside the kicker's box</b> (42″ × 48″). The ball's position is what counts, not where your plant foot is. <button class="cite" data-r="kickbox">§4A</button></li>
+    <li>Kicking the ball at or above the <b>knee</b> is a foul. <button class="cite" data-r="knee">§4C</button></li>
+    <li>A kick means a <b>leg moving forward</b>. Freeze, and whatever the pitch was stands — so letting it hit your back leg is a strike. <button class="cite" data-r="kickbox">§4A</button></li>
+    <li>Hitting it with an arm, chest, or anything but a leg is a strike. <button class="cite" data-r="strike">§4B</button></li>
+    <li>Once the ump makes the call as the ball passes the back of the box, nothing further can be done about it. <button class="cite" data-r="kickbox">§4A</button></li>
+  </ul>
+
+  <h3>Crashing</h3>
+  <p>The defining difference from baseball. Once the ball is pitched, the defense is allowed to run at you.</p>
+  <ul class="b">
+    <li>Infielders may start no closer than the <b>40-foot line</b> — the mark two-thirds of the way down each baseline, with an invisible line joining the two. <button class="cite" data-r="crashline">§2A</button></li>
+    <li>The <b>pitcher</b> may charge once the ball is pitched, but no closer than <b>5 feet</b> from the kicker's box. Closer than that before the kick and it's a ball. <button class="cite" data-r="crash">§4G</button></li>
+    <li>Fielders may not advance in front of the pitcher. Doing so makes it a ball — unless the kicker chooses to kick it anyway. <button class="cite" data-r="crash">§4G</button></li>
+    <li>Everyone must be in position <b>before</b> the kick. After the kick, anyone can go anywhere. <button class="cite" data-r="positions">§4G</button></li>
+  </ul>
+
+  <div class="card note">
+    <span class="label">Two things the rulebook gets geometrically wrong here</span>
+    <p><b>The crash line sits in front of the pitcher.</b> The 40-ft marks are measured along the baselines, which run at 45° to the home-to-second axis. The line joining them therefore crosses the middle of the diamond about <b>28 feet</b> from home — roughly <b>14 feet closer to the kicker than the mound</b> at 42 ft 2.5 in. So a shortstop or charger standing legally on that line is already ahead of the pitcher, which sits awkwardly against the clause forbidding fielders from advancing in front of the pitcher. The only workable reading: that clause governs the charge, not the starting spot — nobody gets closer to home than the pitcher does.</p>
+    <p><b>And the note that the mound is "two-thirds the distance of the baseline" doesn't hold.</b> Two-thirds of a 60-ft baseline is 40 ft, measured along a baseline. The mound sits at 42 ft 2.5 in along a different line entirely. Worth agreeing where the cones go before first pitch.</p>
+  </div>
+
+  <div class="card tip">
+    <span class="label">There is no "stay near your position" rule</span>
+    <p>The only 15 feet in the rulebook is the line defining where the outfield begins — 15 ft behind any base. There's no radius you have to stay within. Fielders just have to be in a legal position before the kick, six in the infield and four in the outfield, and positions lock once the inning starts. <button class="cite" data-r="positions">§4G</button></p>
+  </div>
+
+  <figure>
+    <svg viewBox="0 0 420 310" role="img" aria-label="Infield diagram showing the 40-foot crash line crossing the diamond about 14 feet in front of the pitching mound">
+      <polygon points="210,272 330,152 210,32 90,152" fill="#2F6B4F" fill-opacity=".14" stroke="#2F6B4F" stroke-width="1.5"/>
+      <line x1="210" y1="272" x2="352" y2="130" stroke="#14261F" stroke-width="1.5"/>
+      <line x1="210" y1="272" x2="68" y2="130" stroke="#14261F" stroke-width="1.5"/>
+
+      <line x1="130" y1="192" x2="290" y2="192" stroke="#DC3B2B" stroke-width="3" stroke-dasharray="9 6"/>
+      <text x="210" y="185" font-family="Barlow Condensed,sans-serif" font-weight="700" font-size="14" fill="#DC3B2B" text-anchor="middle">INFIELDERS START HERE — 40 FT LINE</text>
+      <circle cx="130" cy="192" r="3.5" fill="#DC3B2B"/>
+      <circle cx="290" cy="192" r="3.5" fill="#DC3B2B"/>
+
+      <circle cx="210" cy="152" r="7" fill="#C77A4A"/>
+      <text x="228" y="149" font-family="Public Sans,sans-serif" font-size="11" fill="#A85F30">mound, 42 ft 2.5 in</text>
+
+      <line x1="210" y1="152" x2="210" y2="192" stroke="#A85F30" stroke-width="1.5"/>
+      <text x="204" y="176" font-family="Public Sans,sans-serif" font-size="10.5" fill="#A85F30" text-anchor="end">~14 ft</text>
+
+      <line x1="160" y1="258" x2="260" y2="258" stroke="#C77A4A" stroke-width="2.5" stroke-dasharray="5 4"/>
+      <text x="210" y="252" font-family="Barlow Condensed,sans-serif" font-weight="600" font-size="13" fill="#A85F30" text-anchor="middle">PITCHER STOPS HERE — 5 FT</text>
+
+      <rect x="203" y="265" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.5"/>
+      <rect x="323" y="145" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.5"/>
+      <rect x="203" y="25" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.5"/>
+      <rect x="83" y="145" width="14" height="14" fill="#fff" stroke="#14261F" stroke-width="1.5"/>
+      <text x="352" y="142" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A">1st</text>
+      <text x="210" y="18" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A" text-anchor="middle">2nd</text>
+      <text x="52" y="142" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A">3rd</text>
+      <text x="210" y="296" font-family="Public Sans,sans-serif" font-size="11" fill="#3D544A" text-anchor="middle">home</text>
+    </svg>
+    <figcaption>Because the 40-ft marks are measured along the baselines, the line joining them cuts across the diamond ahead of the mound. A crashing infield can be on top of you before the ball reaches your foot.</figcaption>
+  </figure>
+
+  <h3>Starting the play</h3>
+  <ul class="b">
+    <li>The ball is live the moment it <b>leaves the pitcher's hand</b>. That's when the defense may begin crashing. <button class="cite" data-r="crash">§4G</button></li>
+    <li>Runners stay frozen a beat longer — you may not leave your base until the ball is <b>kicked</b>. <button class="cite" data-r="lead">§3A</button></li>
+  </ul>
+
+  <h3>Running</h3>
+  <ul class="b">
+    <li><b>No leading off and no stealing.</b> You cannot step off early for a head start, and you cannot advance during a pitch that isn't kicked. <button class="cite" data-r="lead">§3A</button></li>
+    <li>Running <b>through</b> first base, you must touch the <b>orange safety base</b> in foul territory. Missing it is an out. <button class="cite" data-r="safety">§4F</button></li>
+    <li>But if you're <b>continuing on to second</b>, you don't need the safety base — the white bag is legal. <button class="cite" data-r="safety">§4F.2</button></li>
+    <li>After overrunning first, <b>turn right</b>. Turning left can be read as intent to advance, and you may be tagged. <button class="cite" data-r="overrun">§4F</button></li>
+    <li>First base is the <b>only</b> base you may overrun. Anywhere else, stepping off makes you taggable — including when you're forced back to first. <button class="cite" data-r="overrun">§4F.5</button></li>
+    <li>Stray more than <b>5 feet from the baseline</b> — the direct line between the bases — and you're out. That's the rule people run into when dodging a thrown ball. <button class="cite" data-r="baseline">§4F</button></li>
+    <li>A tie goes to the runner, always. <button class="cite" data-r="ties">§4F</button></li>
+  </ul>
+
+  <div class="card note">
+    <span class="label">Nothing in the rulebook covers wet ground</span>
+    <p>There's no relaxed overrun or sliding allowance for rain or mud. The only weather provision is calling the game: after three full innings it's a regulation result, before that it can be replayed. <button class="cite" data-r="called">§1C</button></p>
+  </div>
+
+  <h3>How outs are made</h3>
+  <ul class="b">
+    <li><b>Force out</b> — a fielder holding the ball touches the base you're obliged to run to, before you get there. They need <b>decisive control</b> of the ball while touching the base. <button class="cite" data-r="force">§3A</button></li>
+    <li><b>Tag out</b> — a fielder touches you with the ball while you're off a base. <button class="cite" data-r="tag">§3A</button></li>
+    <li><b>Thrown out</b> — a fielder throws the ball at you and hits you at the <b>shoulders or below</b>. <button class="cite" data-r="throwat">§3A</button></li>
+    <li><b>Fly out</b> — the ball is caught in the air, in fair <i>or</i> foul territory. A caught foul keeps the ball live, so runners can advance. <button class="cite" data-r="flyout">§3A</button></li>
+    <li>A ball off your <b>head</b> is a free pass — you're safe. Unless you weren't in running motion, in which case the ump may still call you out. <button class="cite" data-r="throwat">§3A</button></li>
+    <li>Duck or slide and you forfeit that protection: any part of you becomes fair game. <button class="cite" data-r="throwat">§3A</button></li>
+    <li>Taking the lead force <b>removes</b> the force from every runner behind it. Get the runner at first and the runner on second is no longer forced. <button class="cite" data-r="force">§3A</button></li>
+  </ul>
+
+  <h3>Ending the play</h3>
+  <ul class="b">
+    <li>The play is over when the <b>pitcher decisively touches the mound while holding the ball</b> — not when the ball reaches the infield, and not when the ump feels like it. <button class="cite" data-r="pstop">§4E</button></li>
+    <li>The head ref then calls time and blows a whistle. <button class="cite" data-r="pstop">§4E</button></li>
+    <li>Runners <b>past halfway</b> to the next base are awarded it. Everyone else returns to their last base. <button class="cite" data-r="pstop">§4E</button></li>
+    <li>Once the pitcher has touched the mound they can't change their mind and make another play. <button class="cite" data-r="pstop">§4E</button></li>
+  </ul>
+  <div class="card tip">
+    <span class="label">Know where halfway is</span>
+    <p>A runner who is one stride past the midpoint when the pitcher touches the mound gets the base for free. Over a season that's several bases gained by nothing but paying attention.</p>
+  </div>
+</section>
+
+<!-- ============ OUTS ============ -->
+<section id="outs">
+  <h2>Ways you'll get yourself out</h2>
+  <p class="deck">None of these require the other team to do anything clever.</p>
+
+  <h3>Baserunning</h3>
+  <div class="outs">
+    <div class="out"><b>Left the base before the ball was kicked</b><span>Leading off is an out, not a warning.</span></div>
+    <div class="out"><b>Ran through first on the white base</b><span>Going <b>through</b> the bag, the orange safety base is mandatory. Rounding toward second, the white one is fine.</span></div>
+    <div class="out"><b>Overran first and drifted left</b><span>Reads as intent to advance. You're now taggable. Turn right.</span></div>
+    <div class="out"><b>Stepped off second or third</b><span>First base is the only base you may overrun.</span></div>
+    <div class="out"><b>Ran more than 5 ft outside the baseline</b><span>The baseline is the direct line between the bases. Swinging wide to dodge a throw is the usual way this happens — take the hit instead.</span></div>
+    <div class="out"><b>Caught up to the runner ahead of you</b><span>The <b>leading</b> runner is out, the opposite of baseball. Stay behind a slow runner.</span></div>
+    <div class="out"><b>Slid into first base</b><span>Illegal, always.</span></div>
+    <div class="out"><b>Slid with cleats up or two feet</b><span>Out, possibly ejected. One leg, toe down, or go hands first.</span></div>
+    <div class="out"><b>Left early on a fly and didn't retag</b><span>If you left before a fielder touched it and it's caught in the air, you must return and tag.</span></div>
+    <div class="out"><b>Touched the ball while off a base</b><span>Out, intentional or not.</span></div>
+    <div class="out"><b>Clipped a base instead of touching it</b><span>This is about running, not fielding. Inches of slack are forgiven; more than that is challengeable, you're out, and runs that scored can be rescinded. Home plate is the 42″ × 12″ rectangle, not the pentagon.</span></div>
+  </div>
+
+  <h3>Kicking</h3>
+  <ul class="b">
+    <li>Contacting the ball <b>behind</b> the kicker's box — foul.</li>
+    <li>Kicking it at or above the <b>knee</b> — foul. This one quietly stacks up on power kickers who get under the ball.</li>
+    <li>Trapping it at the plate with no forward momentum — foul.</li>
+    <li>Not being there when your spot comes up — out. <b>Know the two names in front of you.</b> <button class="cite" data-r="order">§3A</button></li>
+  </ul>
+
+  <h3>Everything else</h3>
+  <div class="card flag">
+    <span class="label">Base coaches cannot touch their runners</span>
+    <p>Touching a runner during live play stops the play and produces an out, with no advancement. Point and shout — never grab, pat, or steer. <button class="cite" data-r="coach">§2D</button></p>
+  </div>
+  <ul class="b">
+    <li>Bench players stay in the dugout or on-deck box. Touching a ball or blocking a play earns a Yellow Card and kills the play. <button class="cite" data-r="coach">§2D</button></li>
+    <li>Pinch runners are not allowed. If you can't kick and run, you can't play. <button class="cite" data-r="pinch">§5C</button></li>
+  </ul>
+</section>
+
+<!-- ============ STRATEGY ============ -->
+<section id="strategy">
+  <h2>Winning strategies</h2>
+  <p class="deck">Everything on offense flows from one question: how hard is this defense crashing?</p>
+
+  <h3>Bunt or blast</h3>
+  <p>A <b>bunt</b> is a deliberately soft kick that dies in the infield. A <b>blast</b> is a hard kick meant to get past people. The choice depends almost entirely on where the first and third basemen — the corners — are standing when the ball is pitched.</p>
+
+  <div class="two-up">
+    <div class="pick bunt">
+      <div class="hd">Bunt</div>
+      <div class="when">when the corners aren't coming</div>
+      <ul>
+        <li>The first and third basemen are still back on the 40-ft line, or standing flat rather than already moving. If nobody is charging, a ball that stops rolling 15 feet down the third-base line takes so long to reach that you'll be standing on first before the throw arrives.</li>
+        <li>You're quick, and either no runners are on, or there's a runner on second only — they aren't forced to move, so your soft kick can't cost them their base.</li>
+        <li>You need a single run and the third baseman is deep. Think about what you're asking of them: sprint 30 feet, pick up a slow-rolling ball barehanded, and make an accurate throw home while your runner on third has been running since contact. That is the hardest sequence in kickball to execute.</li>
+        <li>The defense has just been beaten by a deep kick and has visibly backed everyone up. They're not set to charge.</li>
+      </ul>
+    </div>
+    <div class="pick blast">
+      <div class="hd">Kick hard</div>
+      <div class="when">when they're charging at you</div>
+      <ul>
+        <li>They're crashing. A charging infield has nobody behind it — a hard grounder through a gap the fielders have already vacated is a double.</li>
+        <li>Two outs. You want the ball past people rather than riding on one throw.</li>
+        <li>Runners on and you need to move them more than one base.</li>
+        <li>The outfield is shallow, which it usually is, because kickballs don't carry.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card flag">
+    <span class="label">Never bunt into the base a forced runner has to reach</span>
+    <p>A bunt hands the ball to a fielder standing right where the force play is. The two situations to avoid outright:</p>
+    <p><b>Bases loaded.</b> Your runner on third is forced home, straight into the fielder who just picked up your bunt. It's the easiest out on the field and often two.</p>
+    <p><b>Runners on first and second.</b> A bunt toward third gives the third baseman a force at a base they're already standing on.</p>
+    <p>With a runner on <b>first only</b>, it's more nuanced than a flat no. A soft bunt down the third-base line can genuinely advance them — the throw to second is long and a kickball rolls slowly. Just know you're trading your own at-bat for their base, so it's a play for a fast lead runner and a slow-footed third baseman, not a default.</p>
+  </div>
+
+  <h3>Aim, don't just launch</h3>
+  <ul class="b">
+    <li><b>Down the lines.</b> Crashing corners leave them open.</li>
+    <li><b>The third-base side.</b> Longest throw on the field, and the one most likely to sail.</li>
+    <li><b>The outfield gaps</b>, where two fielders converge and neither calls it.</li>
+    <li><b>Hard and low at a charging fielder's feet.</b> Nobody fields that cleanly at a sprint.</li>
+    <li><b>Never the lazy pop-up.</b> It's an out and it freezes every runner. Kick the top half of the ball.</li>
+  </ul>
+
+  <div class="card tip">
+    <span class="label">Aim with your hips, not your ankle</span>
+    <p>Placement comes from your approach, not your foot. Set your run-up so that your <b>hips and plant foot are already pointing where you want the ball to go</b> as you arrive at it. Trying to steer by swivelling your kicking foot at the last moment gives you far less control and usually produces a spinning ball that goes foul or straight up.</p>
+    <p>Practical version: to go down the third-base line, approach the ball from the first-base side so your body opens that way naturally.</p>
+  </div>
+
+  <h3>Working the count</h3>
+  <ul class="b">
+    <li><b>Don't be afraid to take the first pitch</b> — especially if it arrives uncomfortably fast, bouncy, or with spin on it. You learn the pitcher's delivery and the ump's zone for free. This is what people mean by <b>"wait for yours"</b> and <b>"good eye"</b>.</li>
+    <li>A 6-inch zone is <i>low</i>. Most pitchers miss high, and the single fastest improvement available to a new kicker is laying off anything above the shins.</li>
+    <li>Track the double-bounce requirement. Pitchers who put spin on the ball frequently fail to bounce it twice, and each of those is a free ball.</li>
+    <li>Starting 3–0 against a wild pitcher? The two-base award is worth more than most kicks you could produce.</li>
+    <li>With two strikes, a foul ends you. Shorten up, put it on the ground, live to run.</li>
+  </ul>
+
+  <div class="card tip">
+    <span class="label">Play the psychological game</span>
+    <p>If a pitcher has shown you they're struggling, let them keep struggling. Don't rescue them by swinging at something you don't want.</p>
+    <p>At 3–0 or 3–1, taking a borderline strike costs you very little compared with the value of a walk. A called strike with three balls in hand still leaves you in a good count; a bad kick ends the at-bat entirely. The pitcher feels that asymmetry too, and pitchers who know they have to throw a strike tend to throw a worse one.</p>
+  </div>
+
+  <h3>Baserunning without a lead</h3>
+  <p>You can't steal and you can't lead off. Your entire edge is anticipation and read speed.</p>
+  <ul class="b">
+    <li><b>Know your halfway mark</b>, because the play dies when the pitcher touches the mound and past halfway you're awarded the base.</li>
+    <li><b>Make them throw at you.</b> Most fielders miss, and a miss leaves the ball loose with no base cap.</li>
+    <li><b>Read flies early</b> — see the tag-up note below, because this is the rule most often misapplied.</li>
+  </ul>
+
+  <div class="card flag">
+    <span class="label">Tagging up: two separate tests that everyone merges into one</span>
+    <p>There is no "bobble" or "fumble" rule. Refs get tangled here because two different questions are being decided at once, and they have different answers.</p>
+    <p><b>When may you leave?</b> If you stay on your base until a fielder makes <b>first contact</b> with the ball in the air, you may go — and it doesn't matter whether the catch is ultimately completed. Waiting for first contact satisfies tagging up. You do not have to wait for the catch to finish.</p>
+    <p><b>Is the kicker out?</b> Separately, the catch has to actually be completed for the fly out to stand. With two outs, if a kicked ball in the air isn't "directly and decisively caught" and a runner scores in the meantime, the run counts.</p>
+    <p>So the practical instruction is: on any ball in the air, stay put until you see a glove or hand touch it, then run immediately. The word <b>"decisively"</b> is never defined in the rulebook, which is exactly why this gets argued — worth asking your ump how they're reading it. <button class="cite" data-r="tagup">§3A</button> <button class="cite" data-r="decisive">§4H.3</button></p>
+  </div>
+
+  <div class="card tip">
+    <span class="label">The overthrow cap depends on the throw, not the runner</span>
+    <p>The one-base limit applies only to an <b>overthrow to the first baseman for a force out</b>. That runner gets one extra base and no more. Every <i>other</i> runner on the field is unrestricted, so <b>a runner on second scores on an overthrow at first.</b> Round hard on every throw to first.</p>
+    <p>The cap does not attach to a throw <b>aimed at a runner's body</b>. If a fielder throws at someone and misses, nobody is capped — including the runner heading to first, if that's who they threw at. What matters is whether the throw was to the base for a force, or at a person. <button class="cite" data-r="overthrow">§5A</button></p>
+    <p>Separately, a ball that leaves the field of play entirely — street, dugout, trash can — caps everyone at two bases, however it got there. <button class="cite" data-r="outofplay">§5B</button></p>
+  </div>
+
+  <div class="card flag">
+    <span class="label">Force outs end innings differently</span>
+    <p>If the third out is a <b>force</b>, no runs count — even ones that crossed the plate first. If it's a <b>tag</b>, runs scored before the tag do count. <button class="cite" data-r="forcelast">§4H</button></p>
+  </div>
+
+  <h3>Managing the clock and the run caps</h3>
+  <ul class="b">
+    <li><b>Once you've scored five in an inning, run wild.</b> The inning ends at six regardless, so an out costs you almost nothing.</li>
+    <li><b>Ahead by eleven, play for exactly one run.</b> The twelfth ends the game — don't strand runners chasing a big inning.</li>
+    <li><b>Trailing when the clock is called:</b> take pitches, use your challenge, extend the inning.</li>
+    <li><b>Leading when it's called:</b> kick the first decent pitch and keep at-bats short.</li>
+    <li><b>Your captain's challenge is an asset.</b> It stops the clock for a full minute and you keep it if you win. Save it for a missed base or an inning-ending force. <button class="cite" data-r="challenge">§2E</button></li>
+    <li>Seeding is settled by record, then head-to-head, then <b>run differential</b>, then total runs. With the inning capped at six, a run you prevent is worth as much as a run you score. <button class="cite" data-r="seeding">§6B</button> <button class="cite rsb" data-r="seeding">RS</button></li>
+  </ul>
+
+  <h3>On defense</h3>
+  <ul class="b">
+    <li><b>Get the force.</b> It's the only out that doesn't involve touching a moving human.</li>
+    <li><b>Crash selectively.</b> Corners hard against bunters, middle holds, nobody crashes a power kicker.</li>
+    <li><b>Throw low — hips and thighs.</b> High is an automatic safe. Never at the head.</li>
+    <li><b>Get the ball to the pitcher.</b> Ending the play often beats a low-percentage throw.</li>
+  </ul>
+</section>
+
+<!-- ============ POSITIONS ============ -->
+<section id="positions">
+  <h2>What am I thinking right now?</h2>
+  <p class="deck">Tap where you're standing. Each position gets the checklist to run before the pitch, and what to do the moment the ball is kicked.</p>
+
+  <div class="toggle" role="group" aria-label="Choose defense or offense">
+    <button id="tabD" aria-pressed="true">Defense</button>
+    <button id="tabO" aria-pressed="false">Offense</button>
+  </div>
+
+  <div id="fieldPanel">
+    <div class="fieldwrap">
+      <svg viewBox="0 0 420 380" role="group" aria-label="Kickball field. Tap a position for its guide.">
+        <path d="M210 352 L20 162 L20 40 L400 40 L400 162 Z" fill="#3C7D5E" fill-opacity=".55"/>
+        <polygon points="210,352 330,232 210,112 90,232" fill="#C77A4A" fill-opacity=".45" stroke="#fff" stroke-opacity=".5" stroke-width="1.5"/>
+        <line x1="210" y1="352" x2="392" y2="170" stroke="#fff" stroke-width="2" stroke-opacity=".85"/>
+        <line x1="210" y1="352" x2="28" y2="170" stroke="#fff" stroke-width="2" stroke-opacity=".85"/>
+        <line x1="130" y1="272" x2="290" y2="272" stroke="#FFD166" stroke-width="2.5" stroke-dasharray="8 6"/>
+        <rect x="203" y="345" width="14" height="14" fill="#fff"/>
+        <rect x="323" y="225" width="14" height="14" fill="#fff"/>
+        <rect x="203" y="105" width="14" height="14" fill="#fff"/>
+        <rect x="83" y="225" width="14" height="14" fill="#fff"/>
+        <rect x="323" y="241" width="13" height="13" fill="#F5A623"/>
+
+        <g class="pos" data-p="P" tabindex="0" role="button" aria-label="Pitcher"><circle cx="210" cy="232" r="17"/><text x="210" y="238">P</text></g>
+        <g class="pos" data-p="C" tabindex="0" role="button" aria-label="Catcher"><circle cx="210" cy="364" r="17"/><text x="210" y="370">C</text></g>
+        <g class="pos" data-p="1B" tabindex="0" role="button" aria-label="First base"><circle cx="313" cy="258" r="17"/><text x="313" y="264">1B</text></g>
+        <g class="pos" data-p="2B" tabindex="0" role="button" aria-label="Second base"><circle cx="272" cy="172" r="17"/><text x="272" y="178">2B</text></g>
+        <g class="pos" data-p="SS" tabindex="0" role="button" aria-label="Shortstop or charger"><circle cx="148" cy="172" r="17"/><text x="148" y="178">SS</text></g>
+        <g class="pos" data-p="3B" tabindex="0" role="button" aria-label="Third base"><circle cx="107" cy="258" r="17"/><text x="107" y="264">3B</text></g>
+        <g class="pos" data-p="LF" tabindex="0" role="button" aria-label="Left field"><circle cx="55" cy="112" r="17"/><text x="55" y="118">LF</text></g>
+        <g class="pos" data-p="LC" tabindex="0" role="button" aria-label="Left center"><circle cx="152" cy="68" r="17"/><text x="152" y="74">LC</text></g>
+        <g class="pos" data-p="RC" tabindex="0" role="button" aria-label="Right center"><circle cx="268" cy="68" r="17"/><text x="268" y="74">RC</text></g>
+        <g class="pos" data-p="RF" tabindex="0" role="button" aria-label="Right field"><circle cx="365" cy="112" r="17"/><text x="365" y="118">RF</text></g>
+      </svg>
+    </div>
+  </div>
+
+  <div id="rolePanel" style="display:none">
+    <div class="rolelist">
+      <button class="rolebtn" data-p="KICK">Kicker</button>
+      <button class="rolebtn" data-p="R1">Runner on 1st</button>
+      <button class="rolebtn" data-p="R2">Runner on 2nd</button>
+      <button class="rolebtn" data-p="R3">Runner on 3rd</button>
+      <button class="rolebtn" data-p="DECK">On deck</button>
+      <button class="rolebtn" data-p="COACH">Base coach</button>
+    </div>
+  </div>
+
+  <div class="detail" id="detail" aria-live="polite"></div>
+</section>
+
+<!-- ============ SITUATIONS ============ -->
+<section id="situations">
+  <h2>Situational cheat sheet</h2>
+  <p class="deck">What each side wants, at a glance.</p>
+  <div id="sits"></div>
+</section>
+
+<!-- ============ UMP ============ -->
+<section id="ump">
+  <h2>Confirm with the ump before game one</h2>
+  <p class="deck">Every one of these is genuinely ambiguous, undefined, or varies by field.</p>
+  <div id="asks"></div>
+</section>
+
+<!-- ============ REGULAR SEASON ============ -->
+<section id="rs">
+  <h2>Where the regular season differs</h2>
+  <p class="deck">Everything above is written to the tournament rules. If you're playing a league night, these are the numbers that change.</p>
+  <div id="diffs"></div>
+
+  <div class="card flag">
+    <span class="label">About the four-foul thing</span>
+    <p>The tournament PDF says four fouls in §3A but still says three in §4C. The regular season rulebook says three in both places. <b>Play it as three</b> — the tournament document appears to carry an unfinished edit rather than a new rule.</p>
+    <p>The same pattern shows up in the minimum-player rule: the tournament text says you must begin and finish with eight, then says you forfeit with fewer than seven at start time.</p>
+  </div>
+
+  <h3>Social (C) versus competitive (A and B)</h3>
+  <p>Only two rules actually differ by division, but the first one reshapes the whole game.</p>
+
+  <div class="two-up">
+    <div class="pick bunt">
+      <div class="hd">Social — C</div>
+      <div class="when">underhand, smooth, minimal bounce</div>
+      <ul>
+        <li>Pitches must be released underhand at moderate speed with little-to-no bounce. A bouncy pitch is an immediate ball. <button class="cite" data-r="social">§4E</button></li>
+        <li>The catcher cannot advance in front of the kicker before the kick — also a ball. <button class="cite" data-r="social">§4D.5</button></li>
+        <li>The catcher sets up directly behind the box; side positioning is for intermediate and advanced days only. <button class="cite" data-r="catcherpos">§2C</button></li>
+      </ul>
+    </div>
+    <div class="pick blast">
+      <div class="hd">Competitive — A and B</div>
+      <div class="when">two bounces minimum, junk encouraged</div>
+      <ul>
+        <li>A pitch that doesn't bounce twice is a ball. Spin and height are weapons.</li>
+        <li>The catcher may set up behind or to the side of the kicker's box.</li>
+        <li>Nothing restricts crashing by division — but a high-bouncing pitch buys the defense an extra beat.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card note">
+    <span class="label">These two pitching rules point opposite ways</span>
+    <p>§4B makes a pitch that fails to bounce twice a ball. The social-league clause makes a pitch with more than minimal bounce a ball. Read together, a C-division pitcher is asked to do both. In practice the social clause governs on social days — but it's worth confirming, because a strict §4B reading would invert the advice below.</p>
+    <p><b>Playing in C:</b> contact rates go up and strikeouts go down, because nobody can throw junk at you. Walks are rarer, so working the count is worth much less — take one pitch to read the ump, then kick. Defense and baserunning decide these games.</p>
+    <p><b>Playing in A or B:</b> patience pays, and expect to be jammed by high-bouncing pitches that produce pop-ups.</p>
+  </div>
+
+  <div class="card">
+    <span class="label" style="color:var(--ink)">WTNB+ Draft, regular season only</span>
+    <p>Games run 40 minutes rather than 45, and the final inning is announced at the <b>25-minute mark</b> rather than 35. Plan on getting through the order fewer times.</p>
+  </div>
+</section>
+
+</main>
+
+<div id="sheet" role="dialog" aria-modal="false" aria-live="polite">
+  <button class="x" id="sheetX" aria-label="Close rule note">&times;</button>
+  <div id="sheetBody"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>Written to the 2026 Big Apple Sports Classic tournament rules, with regular-season differences marked. Rule notes restate the rulebook and link to the section — always read the original at <a href="https://www.bigapplerecsports.com/pages/kickball-rules" target="_blank" rel="noopener">bigapplerecsports.com</a>, which is the authoritative and current text. When the two disagree, the ump on your field decides.</p>
+  </div>
+</footer>
+
+<script>
+const BASE="https://www.bigapplerecsports.com/pages/kickball-rules";
+
+/* Rule notes: section, plain restatement, optional regular-season difference,
+   optional flagged ambiguity, and a deep link to the live text. */
+const RULES={
+ gamelen:{sec:"§2 Game Length",t:"Game length",b:"Seven innings or 45 minutes, whichever comes first, with 50 minutes for semi-finals and finals. The head ref announces the final inning at 35 minutes. Called in the top of an inning, that's the last one; called in the bottom, one more full inning follows.",rs:"Regular season is 45 minutes with no extended games, and 40 minutes for WTNB+ Draft, where the final inning is called at 25 minutes.",a:"#sec-2"},
+ mercy:{sec:"§2 Mercy Rule",t:"Mercy rule",b:"A team may not score more than six runs in an inning. Once the sixth crosses, that half-inning is complete.",rs:"Regular season caps the inning at seven runs, not six.",a:"#sec-2"},
+ slaughter:{sec:"§2 Slaughter Rule",t:"Slaughter rule",b:"The moment the run differential passes 12, the game is complete and the score stands as is.",rs:"Regular season uses a differential of more than 14.",a:"#sec-2"},
+ home:{sec:"§1 Home Team",t:"Deciding home team",t2:"",b:"Home team is settled by paper-rock-scissors. For all bracket play, the higher-seeded team chooses home or away.",a:"#sec-1"},
+ mound:{sec:"§4E Pitcher's Rules",t:"The pitching mound",b:"Home plate to the pitching rubber measures 42 ft 2.5 in from the back tip of the plate. It's marked with a cone or visual object and can be moved if there's an obstruction. The ball must be released at the rubber — not in front of it or to the side — and pitchers get two warm-up pitches once per game. Stalling risks a Yellow Card.",a:"#sec-4-e"},
+ bounce:{sec:"§4B Strikes",t:"Bouncing pitches",b:"A pitch must bounce at least twice before reaching the plate. Any ball that doesn't is called a ball. If the second bounce lands on the plate it's a strike.",rs:"Same in both rulebooks — but social leagues invert it, requiring smooth rolling with minimal bounce.",a:"#sec-4-b"},
+ zone:{sec:"§4B Strikes",t:"The strike zone",b:"42 inches wide by 6 inches high, defined as the negative space between the two strike plates. Judged at the front of the plate only, unless a ball bounces directly on the plate. Any pitch crossing above the 6-inch plane at the front of the plate is a ball.",a:"#sec-4-b"},
+ fouls:{sec:"§3A / §4C",t:"Strikes and fouls",b:"Three strikes is an out. Three fouls is an out. At two strikes, the next foul is also an out. A third foul caused by a stationary object in fair territory — a branch, overhead fencing — earns one additional foul.",am:"The tournament PDF says four fouls in §3A but three in §4C. The regular season rulebook says three in both. Play three, confirm with your ump.",a:"#sec-3-a"},
+ walk:{sec:"§4D Balls",t:"Balls and walks",b:"Four balls is a walk, worth one base. Four consecutive balls before any strike or foul is worth two bases. A ball is any pitch completely outside the zone, any pitch crossing above the 6-inch plane, any pitch that doesn't bounce twice, or a pitch where a fielder encroached in front of the pitcher.",am:"The rulebook doesn't spell out how runners advance on the two-base award. Worth settling before it happens.",a:"#sec-4-d"},
+ kickbox:{sec:"§4A Kicker's Box",t:"The kicker's box",b:"42 inches wide by 48 inches deep. Contact must be made while the ball is within the box. What matters is where the ball is, not the planted foot. A kick means a leg in forward motion — if the leg doesn't move forward, the pitch is called as if no contact happened. The ump calls it as the ball passes the back of the box, and nothing can be done after that.",a:"#sec-4-a"},
+ knee:{sec:"§4C Foul Balls",t:"Kicking above the knee",b:"Kicking the ball at knee height or above is a foul. So is kicking in front of or behind the box, trapping the ball at home plate without forward momentum, and kicking into an obstruction.",a:"#sec-4-c"},
+ strike:{sec:"§4B Strikes",t:"What counts as a strike",b:"Any pitch through the zone that isn't kicked, and any attempt that misses — including a miss where the ball hits your resting back leg. Contacting the ball with anything other than a leg is also a strike.",a:"#sec-4-b"},
+ crashline:{sec:"§2A Field Size",t:"The 40-foot crash line",b:"Bases are 60 ft apart. The crashing start line is the two-thirds mark between home plate and third base, or home and first — 40 ft — with an invisible line drawn between the two sides, usually coned.",am:"Because the 40-ft marks sit on the baselines, the line joining them crosses the middle of the diamond about 28 ft from home, roughly 14 ft in front of the mound. The rulebook's note that the mound is two-thirds of the baseline doesn't hold geometrically.",a:"#sec-2-a"},
+ crash:{sec:"§4G Crashing",t:"Crashing the plate",b:"Once the ball is pitched, any defender may advance toward home so long as they don't pass the pitcher. Base players must start at 40 ft minimum. A player advancing in front of the pitcher makes it a ball, unless the kicker chooses to kick. The pitcher may not come closer than 5 ft to the box before the kick, or it's a ball.",a:"#sec-4-g"},
+ positions:{sec:"§4G Defending",t:"Fielding positions",b:"Six players infield, four outfield, where the outfield is anything 15 ft behind a base. Infield is 1st, 2nd, 3rd, shortstop/charger, pitcher and catcher. Positions lock once the inning starts, except for injury or illness. Defenders must be in position before the ball is kicked; after the kick they may move anywhere.",am:"There is no rule requiring a fielder to stay within any distance of their nominal position. The only 15 ft is the infield/outfield boundary.",a:"#sec-4-g"},
+ catcherpos:{sec:"\u00a72C / \u00a74D.4.b / \u00a74G",t:"Where the catcher may stand",b:"Three separate provisions covering three different moments.<br><br><b>Setting up, before the pitch (\u00a72C).</b> Behind the kicker's box, or to the side \u2014 with the side option qualified as intermediate and advanced days only. No interfering with play, and no crossing into the box until the ball is kicked. Like every defender, you must be set before the kick rather than moving in.<br><br><b>Before the kick (\u00a74D.4.b).</b> It's a ball if the catcher advances in front of home plate. This is the catcher's equivalent of the pitcher's 5-ft encroachment rule. On social days the wording shifts to advancing in front of the kicker.<br><br><b>During a live play (\u00a74G).</b> Catchers are recommended to stand in front of home plate rather than in the baseline. This sits in the Base Players block, whose opening line concerns not obstructing runners while making active plays, paired with the same advice for base players. So it's about where to wait for a throw home \u2014 out of the third-to-home running lane \u2014 not where to crouch for the pitch. Advisory, with no penalty.<br><br>There is no catcher's box, no minimum or maximum distance behind the plate, and no lateral limit beyond the side-positioning restriction.",am:"Read as above the three provisions don't conflict, but the rulebook never says \u00a74G.2 is post-kick \u2014 it's inferred from where the clause sits. Read as pre-pitch advice instead, it points the opposite way to \u00a74D.4.b. Also note \u00a74F's blocking-the-bases provision: standing in front of the plate to receive keeps it reachable, whereas planting on it risks obstruction and gives up the run.",a:"#sec-2-c"},
+ lead:{sec:"§3A Leading Off",t:"No leading off, no stealing",b:"Leaving the base before the ball is kicked is an out. Base runners may not steal bases or lead off at all.",a:"#sec-3-a"},
+ safety:{sec:"§4F Runners",t:"The safety base",b:"A runner must use the orange safety base when running toward first base, or they're out. If it's obstructed or unusable, first base may be used instead.",am:"§4F.2 adds that a runner does not need the safety base if advancing to second — so the white bag is legal when you're rounding rather than running through.",a:"#sec-4-f"},
+ overrun:{sec:"§4F Runners",t:"Overrunning bases",b:"First base is the only base a runner may overrun without penalty. The runner is expected to turn right after passing through; turning left may be read as intent to advance and the runner may be tagged out, at the ump's discretion. Overrunning any other base — including being forced back to first — leaves you taggable.",a:"#sec-4-f"},
+ baseline:{sec:"§4F Runners",t:"Running out of the baseline",b:"Deviating more than 5 ft from the baseline is an out and play stops. Because running out of the baseline can be treated as obstruction, runners won't advance further without clear instruction from an ump.",a:"#sec-4-f"},
+ ties:{sec:"§4F Runners",t:"Ties go to the runner",b:"If the base is tagged at the same moment the runner's foot lands on it, the tie always goes to the runner.",a:"#sec-4-f"},
+ touch:{sec:"§4F Runners",t:"Touching the base",b:"Missing a base by relative inches is forgiven. Beyond that, a captain may challenge and the runner is out — and runs that only scored because the out wasn't called may be rescinded. Home plate is the 42-by-12-inch rectangle, not the pentagonal mound.",a:"#sec-4-f"},
+ force:{sec:"§3A Forced Play",t:"Force outs",b:"A force applies when a runner may no longer legally occupy their base and must advance. They're out if the next base is tagged first, and the base player needs decisive control of the ball while touching the base. Once a lead forced runner is out, the force is removed from runners behind them.",a:"#sec-3-a"},
+ tag:{sec:"§3A Tagging a Runner",t:"Tag outs",b:"A runner tagged with the ball is out. A runner in contact with the ball while off a base is out, whether or not it was intentional. Deliberately touching the ball after being tagged is obstruction and stops play.",a:"#sec-3-a"},
+ throwat:{sec:"§3A Throwing a Ball",t:"Throwing at a runner",b:"Hitting a runner with a thrown ball at the shoulders or below is an out. Contact above the shoulders means the runner is safe — but if they weren't in running motion, the ump may still call them out. A runner who is sliding or ducking may be hit anywhere. An inadvertent deflection isn't obstruction; deflecting after you're out is, and risks a Yellow Card.",a:"#sec-3-a"},
+ flyout:{sec:"§3A Fly Out",t:"Fly outs",b:"A ball caught in the air in fair or foul territory is an out. A ball caught in foul territory keeps the ball live, so runners may advance.",a:"#sec-3-a"},
+ tagup:{sec:"§3A Tagging Up",t:"Tagging up and first contact",b:"A runner who leaves after the kick and sees the ball caught in the air must return and tag their base before advancing. But a runner who stays on the base until a fielder contacts the ball in the air may advance — regardless of whether it's ultimately caught. First contact counts as allowance to advance.",am:"This governs when you may leave, not whether the kicker is out. Those are separate questions and conflating them is the most common ref error here.",a:"#sec-3-a"},
+ decisive:{sec:"§4H End of Inning",t:"\u201cDecisively caught\u201d",b:"With two outs, if a kicked ball in the air isn't directly and decisively caught and a runner scores before the catch is completed, the run counts.",am:"\u201cDecisively\u201d is never defined anywhere in the rulebook. Ask your ump how they're applying it.",a:"#sec-4-h"},
+ forcelast:{sec:"§4H End of Inning",t:"Force out for the final out",b:"If the last out of an inning is a force out, no runs scored on that play count. If a runner is tagged out when they weren't forced to run, runs that scored before the tag do count.",a:"#sec-4-h"},
+ pstop:{sec:"§4E Pitcher",t:"When the play ends",b:"Play doesn't stop until the pitcher decisively touches the pitching rubber while holding the ball. The head ref then calls time and blows a whistle. Runners return to their previous base unless they're more than halfway, in which case they're awarded the base they were advancing to. Once the pitcher has touched the rubber they may not make further active plays.",a:"#sec-4-e"},
+ overthrow:{sec:"§5A Overthrow",t:"Overthrow at first",b:"An overthrow is a throw to the first baseman for the purposes of a force out. That runner may take only one extra base. Runners on other bases may advance more than one. The rule does not apply when the ball is thrown at a runner — if a fielder throws at someone and misses, that runner may advance past one extra base.",a:"#sec-5-a"},
+ outofplay:{sec:"§5B Ball Out of Play",t:"Ball out of play",b:"A ball leaving natural play — street, dugout, trash can — limits runners to two bases, whether it was thrown or kicked there. If the ump judges it was sent out deliberately to end the play, they may allow play to continue.",a:"#sec-5-b"},
+ order:{sec:"§3A Kicking Out of Order",t:"Missing your turn",b:"Kicking out of order is an out. A player in the lineup who isn't present for their turn to kick is an out — though this doesn't apply to a rostered player who hasn't arrived at the field yet.",a:"#sec-3-a"},
+ coach:{sec:"§2D Non-Active Players",t:"Base coaches and the bench",b:"Players stay in or around the dugout, with exceptions for a first and third base coach. On-deck kickers stay in the dugout or a designated on-deck box. A non-active player who obstructs play gets a Yellow Card and play stops. Base coaches may not touch teammates during active play — doing so stops play, runners don't advance, and the play results in an out.",a:"#sec-2-d"},
+ pinch:{sec:"§5C Pinch Runners",t:"No pinch runners",b:"Pinch runners are not allowed. Every competitor who plays must kick and run; if they can't do both, they may not play.",a:"#sec-5-c"},
+ challenge:{sec:"§2E Challenges",t:"The captain's challenge",b:"Each captain gets one challenge per game. It stops the clock for one minute to discuss the play with the ump and the other captain, after which the ump's call is final. Win the challenge and you keep the right to another. Challenging with none left costs one run each time and the challenge is ignored. Asking for a rule clarification isn't a challenge — arguing a specific call is.",a:"#sec-2-e"},
+ seeding:{sec:"§6B Seeding",t:"Seeding tiebreakers",b:"Overall record first, then head-to-head, then run differential, then total runs scored. In the tournament, head-to-head only applies if all tied teams have played each other.",rs:"The regular season reverses the last two: total runs scored comes before run differential, and head-to-head has no all-played qualifier.",a:"#sec-6-b"},
+ social:{sec:"§4E / §4D.5",t:"Social league pitching",b:"Social pitches must be released underhand at moderate speed with little-to-no bounce, and anything outside those parameters is immediately called a ball. A catcher who advances in front of the kicker before the kick is also a ball in social leagues.",am:"This points the opposite way to §4B, which makes a pitch that fails to bounce twice a ball. On social days the social clause governs, but confirm it.",a:"#sec-4-e"},
+ called:{sec:"§1C Canceled Games",t:"Called games",b:"A game called after three full innings is a regulation game, decided by the score at the end of the last full inning. Called before three full innings, it isn't regulation and may be rescheduled.",am:"There's no wet-weather provision anywhere for overrunning, sliding, or baseline tolerance.",a:"#sec-1-c"}
+};
+
+const GLOSS=[
+ ["The basics",[
+  ["Kicker","The person up to kick. Baseball's batter."],
+  ["At-bat","One kicker's turn, from first pitch until they reach a base or are out."],
+  ["Kicking order","The fixed sequence your team kicks in, written down for the umps before the game. Miss your turn and it's an out."],
+  ["Inning","Both teams getting one turn on offense. A half-inning is one team's turn, and ends at three outs or the run cap."],
+  ["Run","One point, scored when a runner touches home plate having legally touched every base on the way."]
+ ]],
+ ["The pitch and the count",[
+  ["Pitching mound","Where the pitcher must release the ball, 42 ft 2.5 in from home plate. Usually a cone rather than a raised mound."],
+  ["Home plate","The plate the kicker stands beside and runners must touch to score. For scoring purposes it's the 42\u2033 \u00d7 12\u2033 rectangle, not the pentagon shape."],
+  ["Strike plates","Two plates set either side of home plate. The empty space between them is the strike zone."],
+  ["Kicker's box","The 42\u2033 \u00d7 48\u2033 area the ball must be inside when you make contact."],
+  ["Strike","A penalty against the kicker: a pitch through the zone you don't kick, a swing and a miss, or contact with anything but your leg. Three and you're out."],
+  ["Ball","A penalty against the pitcher: a pitch outside the zone, above the 6-inch plane, or that fails to bounce twice. Four and you walk."],
+  ["Foul","A kick that goes out of bounds or breaks a kicking rule \u2014 above the knee, outside the box, trapped at the plate. Three and you're out."],
+  ["Dead ball","A foul the defense can't play at all, such as a double kick inside the box."],
+  ["Walk","Reaching first base on four balls. Also called a base on balls."]
+ ]],
+ ["Outs",[
+  ["Out","One of three chances your team's half-inning gets. Three outs and you're off the field."],
+  ["Force out","A fielder with the ball touches the base you're obliged to run to before you arrive. No tag needed."],
+  ["Tag out","A fielder touches you with the ball while you're off a base."],
+  ["Thrown out","A fielder throws the ball at you and hits you at the shoulders or below. Legal in kickball, not in baseball."],
+  ["Fly out","The ball is caught in the air before touching the ground, in fair or foul territory."],
+  ["Forced","Your status when the runner behind you has claim to your base, so you have no legal choice but to advance."]
+ ]],
+ ["Running",[
+  ["Baseline","The direct line between two bases. Stray more than 5 ft from it and you're out."],
+  ["Safety base","The orange base in foul territory beside first. Mandatory when running through first, optional if you're rounding toward second."],
+  ["Leading off","Stepping off your base before the ball is kicked to get a head start. An out in BARS."],
+  ["Stealing","Advancing to the next base on your own during a pitch, without the ball being kicked. Not allowed in BARS at all."],
+  ["Tagging up","Returning to touch your base after a ball is caught in the air, before you may advance. See the first-contact wrinkle in the strategy section."],
+  ["Overthrow","A throw to the first baseman for a force out that gets past them. Caps that runner at one extra base."]
+ ]],
+ ["Field slang",[
+  ["Corners","The first and third basemen. Where they're standing decides whether to bunt."],
+  ["Middle infield","Second base and shortstop."],
+  ["Gaps","The spaces between outfielders, where two people converge and neither calls it."],
+  ["Crashing","The defense charging toward home once the ball is pitched. Infielders start no closer than the 40-ft line."],
+  ["Charger","How BARS names the shortstop slot, reflecting that the job is largely to attack bunts and soft kicks."],
+  ["Bunt","A deliberately soft kick meant to die in the infield."],
+  ["Fair and foul territory","Fair is between the two foul lines running past first and third. Outside them is foul."]
+ ]]
+];
+
+const POS={
+ P:{name:"Pitcher",role:"Infield \u2014 the play ends with you",ask:["How many outs, and which bases are forced?","Is this kicker pulling? I'm 42 feet from a line drive.","Am I crashing this kicker or holding? If I crash, who covers the middle?","Has this kicker shown a bunt yet?"],act:["Soft ball in front of the plate is yours \u2014 you're closest.","Anything else: get to the mound and become the endpoint.","Call out the force base loudly. You're the only one facing the whole field."],job:"Two bounces, low, on the plate. Vary speed rather than location \u2014 a slow, high-bouncing ball is hardest to kick cleanly and produces pop-ups.",key:{t:"One-way door",b:"You can charge to 5 feet but no closer before the kick, or it's a ball. Once you decisively touch the mound holding the ball, you're done \u2014 you can't touch it and then decide to throw."}},
+ C:{name:"Catcher",role:"Infield \u2014 you own home plate",ask:["Is there a runner on 3rd? That's the only thing that matters.","Am I legally set \u2014 behind the box, not creeping in front of the plate? Social day means behind only, no side setup.","Who backs up an overthrow to 1st? Usually me. Go."],act:["Foul pop-ups are yours \u2014 and they're live. Catch it, then look at 3rd.","Throw coming home: step in front of the plate, not onto it, and not into the lane the runner is sprinting down.","Bases loaded means home is a force \u2014 touch the plate with the ball and you don't need to tag anyone.","Throw to first: sprint into foul territory behind the bag."],job:"<b>Before the pitch:</b> set up behind the kicker's box \u2014 or to the side, but only on intermediate and advanced days. Be set before the kick, don't cross into the box until the ball is kicked, and don't creep in front of home plate, which costs your pitcher a ball.<br><br><b>Waiting for a throw home:</b> stand in front of the plate, out of the third-to-home running lane. That's where the collisions happen, and leaving the plate itself reachable keeps you clear of an obstruction call \u2014 blocking it would hand over the run.",key:{t:"The play that wins games",b:"Runner on 3rd, bunt in front of the plate \u2014 your call decides it. If you're going home, shout \u201cHOME\u201d before the fielder picks it up."}},
+ "1B":{name:"First base",role:"Infield \u2014 highest-traffic bag",ask:["Is the kicker fast? Then I need to be at the bag early, not charging.","With 1st empty, every kick is a force here.","Am I on the crash line or the bag?"],act:["Get to the bag first, decide second.","You need decisive control while touching the base \u2014 a juggle isn't an out.","Ball to your right: know whether the pitcher is covering before you leave."],job:"Take the white base and leave the orange one clear. Remember a runner rounding toward second is allowed to take the white bag, so don't plant yourself in their path \u2014 blocking the base is obstruction and gives them the base. Ties go to the runner, so a four-inch stretch genuinely matters.",key:{t:"Catch it first",b:"An overthrow past you costs one base from that runner \u2014 but unlimited bases from everyone else. A heroic stab that gets by you can score two."}},
+ "2B":{name:"Second base",role:"Infield \u2014 the pivot",ask:["Who covers the bag on a ball to short, me or the shortstop? Settle this every pitch.","Runner on 1st means a force at 2nd.","Double play, or do I just want the sure out at 1st?"],act:["Ball to your left is likely yours to 2nd or 1st.","Ball to short: you cover.","Ball to the outfield: you're the cutoff for throws to 2nd and backup on throws to 1st."],job:"With a runner on first, the force at second is an easier out than a throw across the diamond \u2014 and taking the lead force removes the force from every runner behind it.",key:null},
+ "3B":{name:"Third base",role:"Infield \u2014 the hardest job on the field",ask:["Is there a runner on 2nd? Then I'm the difference between a run and no run.","Is this a bunter? I'm the primary bunt defender.","If I crash and they kick it past me, it's a double. Worth it?"],act:["Hard ball at you: knock it down, don't try to field it cleanly. A ball you stop is still an out most of the time; a ball past you is extra bases.","Bunt: charge, barehand it if it's stopped, listen for the catcher's call."],job:"You need the reaction time for a pulled line drive and the closing speed for a bunt, and your throw is the longest on the field.",key:{t:"This is a tag base",b:"Runners into 3rd aren't forced unless 1st and 2nd are also occupied. Have the ball and wait. Don't reach, don't block the bag."}},
+ SS:{name:"Shortstop / Charger",role:"Infield \u2014 highest volume",ask:["Am I playing shortstop or charger today? Different jobs \u2014 the team should know which.","Where are the forces, and who covers 2nd and 3rd if I'm charging?"],act:["You often get to choose the base. Take the lead force.","Nobody forced? Take the sure out at 1st rather than chasing a tag."],job:"Most kickers are right-footed, so most kicks come to the left side. As a charger you attack bunts and soft kicks from the 40-ft line \u2014 which, as written, puts you slightly ahead of the pitcher.",key:null},
+ LF:{name:"Left field",role:"Outfield \u2014 the busy corner",ask:["Outs, and where's the lead runner? That decides my throw before the ball is kicked.","Who's my cutoff on a ball to the gap?","Right-footed power kicker? They pull to me."],act:["Ball in the air: call it early and loud.","On the ground: field it, then look up. The cutoff exists so you don't airmail it.","A catch in foul territory still counts \u2014 and the ball stays live after."],job:"Kickballs don't carry, so outfields play shallow \u2014 but shallow means everything over your head is a triple. Play deep enough that nothing gets behind you and charge aggressively on anything short.",key:{t:"No cap out here",b:"The one-base overthrow rule covers throws to the first baseman for a force. An errant throw from the outfield caps nobody \u2014 it can score everybody."}},
+ LC:{name:"Left center",role:"Outfield \u2014 gap responsibility",ask:["Outs and lead runner, before the pitch.","The gap between me and left is where games are lost. Who calls it?","Am I backing up left field on anything down the line?"],act:["Call everything early and loudly.","Back up your corner outfielder at an angle on every ball hit near you.","Hit your cutoff. Always."],job:"Charging is safe, retreating is not. Play deep enough that nothing gets behind you.",key:null},
+ RC:{name:"Right center",role:"Outfield \u2014 gap responsibility",ask:["Outs and lead runner, before the pitch.","Contact kickers go opposite field \u2014 am I shaded for this one?","Who calls the ball in my gap?"],act:["Call it early and loudly.","Back up right field on anything down the line.","Field it, look up, hit your cutoff."],job:"Charging is safe, retreating is not. Play deep enough that nothing gets behind you.",key:null},
+ RF:{name:"Right field",role:"Outfield \u2014 long throw to third",ask:["Outs and lead runner. My throw is long \u2014 I need the target now.","Runner on 1st? Anything I let through scores them.","Am I backing up first base on throws across the diamond?"],act:["Call it early and loudly.","Ground ball: charge it, then look up before throwing.","Your throw to third is the longest on the field \u2014 use the cutoff."],job:"Kickballs don't carry, so play shallow enough to charge but deep enough that nothing gets behind you.",key:{t:"No cap out here",b:"An errant throw from the outfield isn't an overthrow at first, so nobody is capped. It can score everybody."}},
+
+ KICK:{name:"The kicker",role:"Offense \u2014 five questions, in this order",ask:["<b>How many outs?</b> Two means put it past people. Fewer means I can trade an out for a base.","<b>Who's on, and are they forced?</b> A runner on 1st turns my grounder into a force. A runner on 3rd under two outs means a deep fly scores even if I'm out.","<b>What's the count?</b> Two strikes, I can't foul. Three balls, I might not need to kick.","<b>Where is the defense actually standing?</b> Corners back is a bunt. Everyone crashing is a hard kick past them. Shallow outfield is a kick over their heads.","<b>Clock and score?</b> One run from the slaughter margin, just get that run. One from the inning cap, swing free."],act:["Contact inside the box, below the knee, leg moving forward.","Run through the orange safety base and turn right \u2014 unless you're rounding for second, where the white bag is fine."],job:"The pop-up is the enemy. Getting under the ball produces a lazy fly that freezes every runner and ends the at-bat. Kick the top half and drive it low, with your hips already pointed where you want it to go.",key:null},
+ R1:{name:"Runner on 1st",role:"Offense \u2014 you are forced",ask:["I'm forced. Any ball on the ground and I'm running, no decision needed.","Who's behind me \u2014 a power kicker, or a bunter who makes me a force out?","Outs? With two I go on contact. With fewer, a fly means get back and tag.","Where's halfway to 2nd? That's my line when the play dies."],act:["Ground ball: go, hard.","Fly ball under two outs: stay until a fielder touches it, then go.","Ball to right field: you have the most room. Look for third.","Throw to first gets past the bag: if it was a throw to the baseman for the force, you're capped at one extra base. If they threw at your body and missed, you're not."],job:null,key:{t:"Two ways to lose this base",b:"Don't lead off. Don't touch or pass the runner ahead of you \u2014 <b>they</b> get called out, not you."}},
+ R2:{name:"Runner on 2nd",role:"Offense \u2014 you score on almost anything",ask:["Am I forced? Only if there's a runner on 1st.","I score on almost any base hit. My job is reading the ball off the foot, not watching where it lands.","Is third base crashing? Then a grounder to the left side gets me there easily.","Two outs means I'm running on contact and should already be at speed."],act:["Grounder to the right side: go. The fielders are moving away from third.","Grounder to the left side, under two outs, not forced: freeze a beat. Running into a tag at third is the easiest out in kickball.","Fly ball: stay until first contact, then read the outfielder's arm."],job:null,key:{t:"Run on every throw to first",b:"The one-base cap applies to the runner the throw was for, not to you. <b>You score on an overthrow at first.</b> This is the free run that separates teams."}},
+ R3:{name:"Runner on 3rd",role:"Offense \u2014 outs change everything",ask:["<b>How many outs?</b> Under two, a deep fly scores me and I tag. With two, I go on any contact.","Am I forced? Only with the bases loaded.","Is the infield in? A grounder to a charging fielder means the play is at home and I need to be certain.","Where's the catcher \u2014 in front of the plate or in the baseline?"],act:["Grounder with the infield in, under two outs: hit hard right at someone, hold. Slow, deep, or to the side, go.","Grounder with two outs: go immediately.","Fly ball under two outs: stay on the base until a fielder touches the ball in the air, then leave. You don't have to wait for the catch to be completed.","Two outs and a ball in the air that isn't cleanly caught: run. If you score before the catch is completed, the run counts."],job:null,key:{t:"You're racing the force, not the ball",b:"With two outs, if the third out is a <b>force</b>, no run counts even if you crossed first. If it's a <b>tag</b>, your run stands."}},
+ DECK:{name:"On deck",role:"Offense \u2014 not a decorative position",ask:["Do I know the two names ahead of me? Missing your turn is an out with no play involved.","How many bounces is this pitcher getting? Where's the ump calling the low one?","Does this pitcher crash, and how fast?","How quickly did the defense crash on the last kicker?"],act:["Stay in the dugout or the designated on-deck box.","Wandering onto the field and touching anything gets your team a Yellow Card."],job:"You get a free read on the pitcher and the defense that the kicker in the box doesn't have time to take. Use it, then tell them.",key:null},
+ COACH:{name:"Base coach",role:"Offense \u2014 1st and 3rd",ask:["What's the out count, and does my runner know it? Runners playing the previous out count is the most common error at every level.","Was that throw to the baseman or at the runner? It decides whether they're capped at one base.","Where's the outfielder's arm, and are they set to throw?"],act:["<b>At 1st:</b> own the turn. \u201cRight\u201d on a routine play, \u201cTWO\u201d if it's through the infield. Watch for the overthrow.","<b>At 3rd:</b> own the send-or-hold. Your runner is looking at you, not the ball. Decide early and commit \u2014 the worst outcome is a runner frozen ten feet off the bag.","Watch the fielder's body, not the ball."],job:null,key:{t:"Hands off",b:"You cannot touch your runner during live play. Touching results in an out and runners don't advance. Point and shout."}}
+};
+
+const SITS=[
+ ["Runner on 1st, 0 outs","Kick hard to the right side, or past a crashing infield.","Play the force at 2nd. Middle infielders hold."],
+ ["Runner on 2nd, 0\u20131 outs","Ground ball to the right side. Runner reads and goes.","Corners honest. Take the sure out at 1st."],
+ ["Runner on 3rd, under 2 outs","Deep fly, or bunt down the 3rd base line.","Infield in, catcher in front of the plate, the call is home."],
+ ["Bases loaded","Everything is a force \u2014 put it on the ground, hard. Never bunt here.","The force at home is the easiest out available."],
+ ["2 outs, anyone on","Kick past people. Run on contact.","Any force works. Take the shortest throw."],
+ ["One run from the slaughter margin","Play for exactly one run. The game ends there.","Concede singles, prevent extra bases."],
+ ["One run from the inning cap","Free aggression. The inning is ending anyway.","Get one out, any out. The inning is ending regardless."],
+ ["Clock called, you're down","Take pitches, use the challenge, extend the inning.","Quick outs. First-pitch strikes."],
+ ["Clock called, you're up","Kick the first decent pitch. Keep innings short.","Nothing changes \u2014 just don't give away free bases."],
+ ["Overtime, one-pitch rule","Runner starts on 2nd and a foul is an out. Don't swing at junk.","Infield in from the first pitch. The run is already on 2nd."]
+];
+
+const ASKS=[
+ ["Confirming three fouls, not four?","The tournament PDF says four in \u00a73A and three in \u00a74C. The regular season rulebook says three in both. Settle it before anyone has two."],
+ ["Where exactly are the crash cones?","As written, the 40-ft line crosses the diamond ahead of the mound. Both teams should see the same cones and agree how the \u201cno passing the pitcher\u201d clause is being applied."],
+ ["How are you reading \u201cdecisively caught\u201d?","It's never defined, and it decides whether a fly out stands and whether a run counts with two outs."],
+ ["Tag-up on first contact \u2014 confirmed?","A runner who waits for a fielder's first touch may leave, caught or not. This is the rule most often called wrong."],
+ ["Is the ump calling the low strike?","A 6-inch zone is generous on width and brutal on height. Enforcement varies enormously."],
+ ["How are head-contact calls being read?","A ball off the head is a free base unless you weren't in running motion."],
+ ["On a two-base walk, where do runners go?","The rulebook awards the kicker two bases but doesn't say how runners ahead advance."],
+ ["Is the safety base usable?","If it's missing or damaged you may use first base. Establish it early."]
+];
+
+const DIFFS=[
+ ["Fouls for an out","3","3 in \u00a74C, 4 in \u00a73A \u2014 play 3"],
+ ["Mercy cap per inning","7 runs","6 runs"],
+ ["Slaughter differential","more than 14","more than 12"],
+ ["Game length","45 min, 40 for WTNB+ Draft","45 min, 50 for semis and finals"],
+ ["Final inning called at","35 min, 25 for WTNB+ Draft","35 min"],
+ ["Players to avoid forfeit","7","8 to start and finish"],
+ ["Seeding tiebreakers","record, head-to-head, total runs, differential","record, head-to-head, differential, total runs"],
+ ["Uniforms","team shirt strongly encouraged","matching required \u2014 failure can forfeit"],
+ ["Red card","out of the current game","out of the game and possibly the tournament"],
+ ["Card accumulation","2 yellows or 1 red costs you the next game","no season policy; removal at official discretion"],
+ ["Overtime","end-of-season tournament only","none in pool play, bracket games only"],
+ ["Outside substitutes","allowed, max 4 per game, none in the final tournament","not applicable \u2014 12 to 15 rostered players"]
+];
+
+/* ---------- glossary ---------- */
+document.getElementById("gloss").innerHTML=GLOSS.map(g=>
+ `<div class="gloss"><div class="gtitle">${g[0]}</div>`+
+ g[1].map(r=>`<dl class="gr"><dt>${r[0]}</dt><dd>${r[1]}</dd></dl>`).join("")+
+ `</div>`).join("");
+
+/* ---------- rule sheet ---------- */
+const sheet=document.getElementById("sheet"),sheetBody=document.getElementById("sheetBody");
+function openRule(id,rsOnly){
+  const r=RULES[id];if(!r)return;
+  let h="";
+  if(rsOnly){
+    h+=`<p class="sec">REGULAR SEASON DIFFERENCE</p><p class="ttl">${r.t}</p>`;
+    h+=`<div class="rsblk"><b>League night</b>${r.rs||"No difference recorded for this rule."}</div>`;
+    h+=`<p class="bd">Tournament: ${r.b}</p>`;
+  }else{
+    h+=`<p class="sec">${r.sec}</p><p class="ttl">${r.t}</p><p class="bd">${r.b}</p>`;
+    if(r.am)h+=`<div class="amb"><b>Ambiguous or undefined</b>${r.am}</div>`;
+    if(r.rs)h+=`<div class="rsblk"><b>Regular season differs</b>${r.rs}</div>`;
+  }
+  h+=`<p class="lnk"><a href="${BASE}${r.a||""}" target="_blank" rel="noopener">Read the rule on bigapplerecsports.com</a></p>`;
+  sheetBody.innerHTML=h;
+  sheet.classList.toggle("rs",!!rsOnly);
+  sheet.classList.add("up");
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".cite");
+  if(b&&b.dataset.r){openRule(b.dataset.r,b.classList.contains("rsb"));return;}
+  if(!e.target.closest("#sheet"))sheet.classList.remove("up");
+});
+document.getElementById("sheetX").addEventListener("click",()=>sheet.classList.remove("up"));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")sheet.classList.remove("up")});
+
+/* ---------- positions ---------- */
+function render(k){
+  const d=POS[k];if(!d)return;
+  let h=`<p class="name">${d.name}</p><p class="role">${d.role}</p>`;
+  h+=`<h5>Before the pitch</h5><ul>${d.ask.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+  h+=`<h5>The moment it's kicked</h5><ul>${d.act.map(x=>`<li>${x}</li>`).join("")}</ul>`;
+  if(d.job)h+=`<h5>Your job</h5><p style="margin:0;font-size:15px">${d.job}</p>`;
+  if(d.key)h+=`<div class="key"><b>${d.key.t}</b>${d.key.b}</div>`;
+  document.getElementById("detail").innerHTML=h;
+}
+function selectPos(k,el){
+  document.querySelectorAll(".pos").forEach(n=>n.classList.remove("sel"));
+  document.querySelectorAll(".rolebtn").forEach(n=>n.setAttribute("aria-pressed","false"));
+  if(el){el.classList.add("sel");if(el.classList.contains("rolebtn"))el.setAttribute("aria-pressed","true");}
+  render(k);
+}
+document.querySelectorAll(".pos").forEach(g=>{
+  const go=()=>selectPos(g.dataset.p,g);
+  g.addEventListener("click",go);
+  g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go();}});
+});
+document.querySelectorAll(".rolebtn").forEach(b=>b.addEventListener("click",()=>selectPos(b.dataset.p,b)));
+const tabD=document.getElementById("tabD"),tabO=document.getElementById("tabO");
+const fp=document.getElementById("fieldPanel"),rp=document.getElementById("rolePanel");
+tabD.addEventListener("click",()=>{tabD.setAttribute("aria-pressed","true");tabO.setAttribute("aria-pressed","false");fp.style.display="";rp.style.display="none";selectPos("P",document.querySelector('.pos[data-p="P"]'));});
+tabO.addEventListener("click",()=>{tabO.setAttribute("aria-pressed","true");tabD.setAttribute("aria-pressed","false");rp.style.display="";fp.style.display="none";selectPos("KICK",document.querySelector('.rolebtn[data-p="KICK"]'));});
+
+/* ---------- tables ---------- */
+document.getElementById("sits").innerHTML=SITS.map(s=>
+ `<div class="sit"><div class="s">${s[0]}</div><div class="r"><div class="o"><em>OFFENSE</em>${s[1]}</div><div class="d"><em>DEFENSE</em>${s[2]}</div></div></div>`).join("");
+document.getElementById("asks").innerHTML=ASKS.map(a=>
+ `<label class="ask"><input type="checkbox"><span><b>${a[0]}</b>${a[1]}</span></label>`).join("");
+document.getElementById("diffs").innerHTML=DIFFS.map(d=>
+ `<div class="diff"><div class="dk">${d[0]}</div><div class="dv dr"><em>REGULAR SEASON</em>${d[1]}</div><div class="dv"><em>TOURNAMENT</em>${d[2]}</div></div>`).join("");
+
+/* ---------- nav ---------- */
+const links=[...document.querySelectorAll("#nav a")];
+links.forEach(l=>l.addEventListener("click",e=>{
+  const t=document.getElementById(l.getAttribute("href").slice(1));
+  if(!t)return;
+  e.preventDefault();
+  const reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  t.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
+  t.setAttribute("tabindex","-1");t.focus({preventScroll:true});
+}));
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+  links.forEach(l=>l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id));}});},{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll("main section").forEach(s=>obs.observe(s));
+
+selectPos("P",document.querySelector('.pos[data-p="P"]'));
+</script>
+</body>
+</html>
